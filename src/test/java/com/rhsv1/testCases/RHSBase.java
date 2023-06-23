@@ -2,11 +2,16 @@ package com.rhsv1.testCases;
 
 import java.io.File;
 import java.io.FileInputStream;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+
+
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -16,12 +21,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+
 import com.rhsv1.utilities.ReadConfig;
 import com.rhsv1.utilities.XLUtils;
 
 public class RHSBase {
 	ReadConfig readConfig = new ReadConfig();
+	
+	public static  Logger log;
 
 	public static WebDriver driver;
 	public String browserString = readConfig.getBrowserName();
@@ -31,6 +41,8 @@ public class RHSBase {
 
 	@BeforeMethod
 	public void setup() throws Exception {
+		
+		log=LogManager.getLogger(RHSBase.class);
 
 		if (browserString.equalsIgnoreCase("chrome")) {
 			driver = new ChromeDriver();

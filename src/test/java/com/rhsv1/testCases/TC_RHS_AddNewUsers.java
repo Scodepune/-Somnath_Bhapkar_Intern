@@ -1,11 +1,18 @@
 package com.rhsv1.testCases;
 
+import java.time.Duration;
 import java.util.Map;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.rhsv1.pageObjects.AddNewUsersPageRHS;
 
 public class TC_RHS_AddNewUsers extends RHSBase {
+	
+	Map<String, String> maptestMap;
 
 	@DataProvider(name = "testlink")
 	public Object[][] getData() throws Exception {
@@ -18,32 +25,32 @@ public class TC_RHS_AddNewUsers extends RHSBase {
 		TC_RHS_LoginPage tc_RHS_LoginPage = new TC_RHS_LoginPage();
 		tc_RHS_LoginPage.validUserNamePassword();
 	}
+	
 
-	@Test(dependsOnMethods = "dataAddNewUser")
-	public void addNewUser() throws Exception {
+	@Test(dataProvider = "testlink",priority = 1)
+	public void submitAddNewUser(Map<String, String> maptestMap) throws Exception {
 
+		AddNewUsersPageRHS anpr = new AddNewUsersPageRHS(driver);
+		loginPage();
 		
-		submitAddNewUserTest();
-		clearAddNewUserTest();
-	}
-
-	public void submitAddNewUserTest() throws Exception {
-		AddNewUsersPageRHS anpr = new AddNewUsersPageRHS(driver);
-		Map<String, String> imap = null;
-		dataAddNewUser(imap);
+		anpr.userClick();
+		anpr.addUserClick();
+		anpr.setRole(maptestMap.get("Role"));
+		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(3));		
+		wait.until(ExpectedConditions.elementToBeClickable(anpr.role));
+		anpr.setfullName(maptestMap.get("FullName"));
+		anpr.setmobileNumberUserName(maptestMap.get("MobileNumberUsername"));
+		anpr.setpassword(maptestMap.get("Password"));
+		anpr.setalternateLandLineNumber(maptestMap.get("AlternateLandlineNumber"));
+		anpr.setemail(maptestMap.get("Email"));
+		anpr.setaddress(maptestMap.get("Address"));
+		anpr.setgender(maptestMap.get("Gender"));
+		anpr.setaadharCardNumber(maptestMap.get("AadharNo"));
+		anpr.setPANNumber(maptestMap.get("PANNo"));
 		anpr.clickSubmit();
-
 	}
-
-	public void clearAddNewUserTest() throws Exception {
-		AddNewUsersPageRHS anpr = new AddNewUsersPageRHS(driver);
-		Map<String, String> imap = null;
-		dataAddNewUser(imap);
-		anpr.clickclear();
-	}
-
-	@Test(dataProvider = "testlink")
-	public void dataAddNewUser(Map<String, String> maptestMap) throws Exception {
+	@Test(dataProvider = "testlink",priority = 2)
+	public void clearAddNewUser(Map<String, String> maptestMap) throws Exception {
 
 		AddNewUsersPageRHS anpr = new AddNewUsersPageRHS(driver);
 		loginPage();
@@ -60,6 +67,6 @@ public class TC_RHS_AddNewUsers extends RHSBase {
 		anpr.setgender(maptestMap.get("Gender"));
 		anpr.setaadharCardNumber(maptestMap.get("AadharNo"));
 		anpr.setPANNumber(maptestMap.get("PANNo"));
+		anpr.clickclear();
 	}
-
 }

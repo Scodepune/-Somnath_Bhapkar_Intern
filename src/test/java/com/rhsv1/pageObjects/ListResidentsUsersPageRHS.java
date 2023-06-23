@@ -7,9 +7,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class AddNewUsersPageRHS {
+public class ListResidentsUsersPageRHS {
 
-	public AddNewUsersPageRHS(WebDriver rdriver) {
+	WebDriver driver;
+
+	public ListResidentsUsersPageRHS(WebDriver rdriver) {
 
 		PageFactory.initElements(rdriver, this);
 
@@ -19,18 +21,34 @@ public class AddNewUsersPageRHS {
 	@CacheLookup
 	WebElement user;
 
-	@FindBy(xpath = "//a[normalize-space()='Add User']")
+	@FindBy(xpath = "//a[normalize-space()='List Residents']")
 	@CacheLookup
-	WebElement addUser;
+	WebElement listResidents;
 
-	@FindBy(xpath = "//a[normalize-space()='Add User']")
+	@FindBy(xpath = "//input[@type='search']")
 	@CacheLookup
-	WebElement addNewUser;
+	WebElement setSearch;
 
-	@FindBy(xpath = "//select[@id='role']")
+	@FindBy(xpath = "//tbody/tr[1]/td[7]/a[1]")
 	@CacheLookup
-	public WebElement role;
-	
+	WebElement viewSearchForEnterdData;
+
+	@FindBy(linkText = "View Profile")
+	@CacheLookup
+	WebElement viewProfileData;
+
+	@FindBy(linkText = "Update Profile")
+	@CacheLookup
+	WebElement updateProfileData;
+
+	@FindBy(xpath = "//select[@name='wing']")
+	@CacheLookup
+	WebElement updateWing;
+
+	@FindBy(xpath = "//input[@placeholder='Enter house or flat number']")
+	@CacheLookup
+	WebElement houseNumber;
+
 	@FindBy(xpath = "//input[@placeholder='Enter full name']")
 	@CacheLookup
 	WebElement fullName;
@@ -62,89 +80,156 @@ public class AddNewUsersPageRHS {
 	@FindBy(xpath = "//input[@placeholder='Aadhar Card Number']")
 	@CacheLookup
 	WebElement aadharCardNumber;
-	
+
 	@FindBy(xpath = "//input[@placeholder='PAN Card Number']")
 	@CacheLookup
 	WebElement PANNumber;
-	
+
 	@FindBy(xpath = "//button[@name='submit']")
 	@CacheLookup
-	WebElement submit;
+	WebElement save;
 	
-	@FindBy(xpath = "//button[@type='reset']")
+	@FindBy(xpath="//div[@class='alert alert-success']")
 	@CacheLookup
-	WebElement clear;
+	WebElement successMessage;
 	
+	@FindBy(xpath="//a[@class='btn btn-danger btn-sm']")
+	@CacheLookup
+	WebElement deleteResident;
+	
+	@FindBy(xpath="//div[@class='alert alert-success']")
+	@CacheLookup
+	WebElement deleteSuccessMessage;
+	
+
 	public void userClick() {
 
 		user.click();
 	}
 
-	public void addUserClick() {
+	public void viewListResidents() {
 
-		addUser.click();
+		listResidents.click();
 	}
 
-	public void setRole(String roleSelection) {
+	public void setSearch(String searchData) {
 
-		role.sendKeys(roleSelection);
+		setSearch.sendKeys(searchData);
+	}
+
+	public void updateWingData(String updateWingString) {
+		
+		Select selWingSelect = new Select(updateWing);
+		selWingSelect.selectByVisibleText(updateWingString);
+
+		// updateProfileData.sendKeys(updateWingString);
+
+	}
+
+	public void updateHouseNumber(String houseNumbersString) {
+		// TODO Auto-generated method stub
+		houseNumber.clear();
+		houseNumber.sendKeys(houseNumbersString);
 	}
 
 	public void setfullName(String fullNameString) {
-
+		
+		fullName.clear();
 		fullName.sendKeys(fullNameString);
 	}
 
 	public void setmobileNumberUserName(String mobileNumberUserNameString) {
 
+		mobileNumberUserName.clear();
 		mobileNumberUserName.sendKeys(mobileNumberUserNameString);
 	}
 
 	public void setpassword(String passwordString) {
 
+		password.clear();
 		password.sendKeys(passwordString);
 	}
 
 	public void setalternateLandLineNumber(String alternateLanLineNumberString) {
 
+		alternateLanLineNumber.clear();
 		alternateLanLineNumber.sendKeys(alternateLanLineNumberString);
 	}
 
 	public void setemail(String emailString) {
-
+		
+		email.clear();
 		email.sendKeys(emailString);
 	}
 
 	public void setaddress(String addressString) {
-
+		
+		address.clear();
 		address.sendKeys(addressString);
 	}
 
 	public void setgender(String genderString) {
-
+		
 		Select gendSelect = new Select(gender);
 
 		gendSelect.selectByVisibleText(genderString);
 	}
 
 	public void setaadharCardNumber(String aadharCardNumberString) {
+		
+		aadharCardNumber.clear();
 
 		aadharCardNumber.sendKeys(aadharCardNumberString);
 	}
-	
+
 	public void setPANNumber(String PANNumberString) {
+		
+		PANNumber.clear();
 
 		PANNumber.sendKeys(PANNumberString);
 	}
-	
-	public void clickSubmit() {
 
-		submit.click();
-	}
-	
-	public void clickclear() {
+	public void viewSearchForEnterdData() {
+		
+		
 
-		clear.click();
+		viewSearchForEnterdData.click();
 	}
+
+	public void viewProfileData() {
+
+		viewProfileData.click();
+	}
+
+	public void updateProfileData() {
+
+		updateProfileData.click();
+	}
+
+	public void clickSave() {
+
+		save.click();
+	}
+
+	public String setMessage() {
+
+		String Message1= successMessage.getText();
+		return Message1;
+	}
+
+	public void clickDelete() {
+
+		deleteResident.click();
+	}
+	public String errormessage() {
+
+		deleteResident.click();
+		return errormessage();
+	}
+	public String deleteSuccessMessage() {
+
+		deleteSuccessMessage.getText();
+		return errormessage();
 	
+	}
 }

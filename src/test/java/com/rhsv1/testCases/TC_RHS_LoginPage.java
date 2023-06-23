@@ -6,40 +6,39 @@ import com.rhsv1.pageObjects.LoginPageRHS;
 
 public class TC_RHS_LoginPage extends RHSBase {
 
-		
-	@Test(enabled=true, priority = 1)
-	public void validUserNamePassword(){
+	@Test(priority = 1)
+	public void validUserNamePassword() {
 		String expectedtitle;
 		String actualTitle;
 		LoginPageRHS loginPage = new LoginPageRHS(driver);
 		loginPage.setUserName(readConfig.getUserName());
+		log.info("Enter the user name");
 		loginPage.setPassword(readConfig.getPassword());
+		log.info("Enter the user password");
 		loginPage.clicksign();
+		log.info("Click the sign button");
 		expectedtitle = "Enquiries";
 		actualTitle = driver.getTitle();
 		assertEquals(expectedtitle, actualTitle);
-		
-		 
+
 	}
 
-	@Test(enabled=true, priority = 2)
-	public void inValidUserNamePassword(){
+	@Test(priority = 2)
+	public void inValidUserNamePassword() {
 		String expecteErrorMessage;
 		String actualErrorMessage;
 		LoginPageRHS loginPage = new LoginPageRHS(driver);
 		loginPage.setUserName("Riddhi1");
 		loginPage.setPassword("123");
 		loginPage.clicksign();
-		expecteErrorMessage = "Error!Invalid Username or Password";		
-		actualErrorMessage = loginPage.seterrorMessage();		
+		expecteErrorMessage = "Error!Invalid Username or Password";
+		actualErrorMessage = loginPage.seterrorMessage();
 		assertEquals(expecteErrorMessage, actualErrorMessage);
-		
-		
 
 	}
 
-	@Test(enabled=true, priority = 3)
-	public void blankUserNamePassword(){
+	@Test(priority = 3)
+	public void blankUserNamePassword() {
 		String expecteErrorMessage;
 		String actualErrorMessage;
 		LoginPageRHS loginPage = new LoginPageRHS(driver);
@@ -47,14 +46,13 @@ public class TC_RHS_LoginPage extends RHSBase {
 		loginPage.setPassword("");
 		loginPage.clicksign();
 		expecteErrorMessage = "Error!Username and Password field should not left blank";
-		actualErrorMessage = loginPage.seterrorMessage();		
+		actualErrorMessage = loginPage.seterrorMessage();
 		assertEquals(expecteErrorMessage, actualErrorMessage);
-		
 
 	}
 
-	@Test(enabled=true, priority = 4)
-	public void validUserNameBlankPassword(){
+	@Test(priority = 4)
+	public void validUserNameBlankPassword() {
 		String expecteErrorMessage;
 		String actualErrorMessage;
 		LoginPageRHS loginPage = new LoginPageRHS(driver);
@@ -64,11 +62,11 @@ public class TC_RHS_LoginPage extends RHSBase {
 		expecteErrorMessage = "Error!Password field should not left blank";
 		actualErrorMessage = loginPage.seterrorMessage();
 		assertEquals(expecteErrorMessage, actualErrorMessage);
-		
 
 	}
-	@Test(enabled=true, priority = 5)
-	public void blankkUserNameValidPassword(){
+
+	@Test(priority = 5)
+	public void blankkUserNameValidPassword() {
 		String expecteErrorMessage;
 		String actualErrorMessage;
 		LoginPageRHS loginPage = new LoginPageRHS(driver);
@@ -78,8 +76,7 @@ public class TC_RHS_LoginPage extends RHSBase {
 		expecteErrorMessage = "Error!Username field should not left blank";
 		actualErrorMessage = loginPage.seterrorMessage();
 		assertEquals(expecteErrorMessage, actualErrorMessage);
-		
+
 	}
-		
 
 }
