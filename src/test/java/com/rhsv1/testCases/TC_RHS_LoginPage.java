@@ -17,7 +17,7 @@ public class TC_RHS_LoginPage extends RHSBase {
 		log.info("Enter the user password");
 		loginPage.clicksign();
 		log.info("Click the sign button");
-		expectedtitle = "Enquiries";
+		expectedtitle = "Enquiries1";
 		actualTitle = driver.getTitle();
 		assertEquals(expectedtitle, actualTitle);
 
