@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-<listeners>
-<listener class-name="com.rhsv1.utilities.ExtentReports.ExtentReporting"/>
-</listeners>
-  <test thread-count="5" name="Test">
-    <classes>
-     
-      <class name="com.rhsv1.testCases.TC_RHS_LoginPage"/>
-      <class name="com.rhsv1.testCases.TC_RHS_SectionsPage"/>
-      <class name="com.rhsv1.testCases.TC_RHS_ContentAddNew"/>
-      <class name="com.rhsv1.testCases.TC_RHS_ViewContents"/>
-      <class name="com.rhsv1.testCases.TC_RHS_ViewReceipts"/>
-      
-    </classes>
-  </test> <!-- Test -->
+	<test thread-count="5" name="TestNG">
+		<classes>
+			<class name="com.rhsv1.testCases.TC_RHS_AddExpense" />
+			<class name="com.rhsv1.testCases.TC_RHS_ListResidentsUsers" />
+			<class name="com.rhsv1.testCases.TC_RHS_AddNewUsers" />
+			<class name="com.rhsv1.testCases.TC_RHS_ListExpenses" />
+			<class name="com.rhsv1.testCases.TC_RHS_AddReceipts" />
+			<class name="com.rhsv1.testCases.TC_RHS_LoginPage" />
+			<class name="com.rhsv1.testCases.TC_RHS_SectionsPage" />
+			<class name="com.rhsv1.testCases.TC_RHS_ContentAddNew" />
+			<class name="com.rhsv1.testCases.TC_RHS_ViewContents" />
+			<class name="com.rhsv1.testCases.TC_RHS_ViewReceipts" />
+		</classes>
+	</test> <!-- TestNG -->
 </suite> <!-- Suite -->
